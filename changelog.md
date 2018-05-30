@@ -645,7 +645,7 @@ Minor improvements
 
 
 
-** Fixes**:
+**Fixes**:
 
 - Better error handling when user enters wrong zulip server
 
