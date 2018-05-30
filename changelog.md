@@ -1,14 +1,14 @@
 # Version History
 
-  
+
 
 All notable changes to the Zulip desktop app are documented in this file.
 
- 
+
 
 ### v2.3.2 --2018-05-28
 
-  
+
 This is a quick release since we recently updated the certificate for code signing the app and we want to make sure the previous versions of the app get auto-updates without any conflicts.
 
   <hr>
@@ -32,10 +32,10 @@ This is a quick release since we recently updated the certificate for code signi
 * Fix loading indicator when server is loaded
 * Other minor fixes
 
-  
-  
 
-**API Changes**:
+
+
+**Updated dependencies**:
 
 electron - v2.0.1
 
@@ -48,17 +48,17 @@ electron-updater: v2.21.10
 
 ### v2.2.0-beta --2018-05-08
 
-  
+
 
 **Enhancements**:
 
-* Added do not disturb feature 
+* Added do not disturb feature
 
 * New DMG installer image
 
 * Minor improvements
 
-  
+
 
 **Fixes**:
 
@@ -66,10 +66,10 @@ electron-updater: v2.21.10
 
 * Fix tray icon not showing unread counts
 
-  
-  
 
-**API Changes**:
+
+
+**Updated dependencies**:
 
 electron - v2.0.0
 
@@ -77,7 +77,7 @@ electron-builder: v2.21.10
 
 electron-updater: v2.21.8
 
-  
+
 <hr>
 
 ### v2.0.0 -- 2018-04-20
@@ -100,12 +100,12 @@ electron-updater: v2.21.8
 
 * Minor improvements
 
-  
-  
+
+
 
 **Fixes**:
 
-  
+
 
 * Remove unused shortcuts
 
@@ -117,14 +117,14 @@ electron-updater: v2.21.8
 
 * Other minor fixes
 
-  
 
-**API changes**:
+
+**Updated dependencies**:
 
 * Update electron-builder to `v20.8.1`
 <hr>
 
-  
+
 
 ### v1.9.0 --2018-03-23
 
@@ -140,7 +140,7 @@ electron-updater: v2.21.8
 
 * Other small improvements.
 
-  
+
 
 **Fixes**:
 
@@ -148,31 +148,31 @@ electron-updater: v2.21.8
 
 * Fix app settings overriding issue. This bug was unnoticed from v1.4.0. The bug was overriding the app settings which was pretty bad. Don't worry this works as expected now.
 
-  
+
 
 * Prevent drag and drop events to avoid few security risks.
 
 * Do not allow running insecure contents in the app.
 
-* The ugly white flickering in the webview is now fixed. 
+* The ugly white flickering in the webview is now fixed.
 
-* Fix position of left-sidebar on toggle. 
+* Fix position of left-sidebar on toggle.
 
-* Fix actions tooltip not visible on hover. 
+* Fix actions tooltip not visible on hover.
 
 * Other small fixes.
 
-  
-  
 
-**API Changes**:
+
+
+**Updated dependencies**:
 
 * Upgrade electron to v1.8.4.
 
 * Upgrade spectron to v3.8.0.
 
-  
-  
+
+
 <hr>
 
 ### v1.8.2 --2018-02-27
@@ -195,8 +195,8 @@ electron-updater: v2.21.8
 
 * Other minor improvments.
 
-  
-  
+
+
 
 **Fixes**:
 
@@ -210,20 +210,20 @@ electron-updater: v2.21.8
 
 * Disable electron-connect when it's run from npm start.
 
-* Do not auto-reload app when the system comes back from sleep. 
+* Do not auto-reload app when the system comes back from sleep.
 
 * Only toggle the setting state if the element is present.
 
 * Other minor fixes.
 
-  
 
-**API changes**:
+
+**Updated dependencies**:
 
 * electron - v1.8.2
 
-  
-  
+
+
 <hr>
 
 ### v1.8.1 --2018-01-19
@@ -244,20 +244,20 @@ electron-updater: v2.21.8
 
 * Add logger utility for debugging that makes easier to sharing the apps
 
-  
+
 
 **Fixes**:
 
 * Handle corrupted config files
 
 * Reload full app on system hibernation
-* Load default icon if organization icon is not available 
+* Load default icon if organization icon is not available
 
 * Focus app when a notification is triggered
 
 * Reflect changes in the preference page (#362)
 
-* Set the default value of flash taskbar setting [Windows] 
+* Set the default value of flash taskbar setting [Windows]
 
 * Rename Zoom In keyboard shortcut
 
@@ -267,9 +267,9 @@ electron-updater: v2.21.8
 
 * Minor bug fixes
 
-  
 
-#**API changes**:
+
+#**Updated dependencies**:
 
 * electron - v1.7.10
 
@@ -277,10 +277,10 @@ electron-updater: v2.21.8
 
 * electron-updater - 2.18.2
 
-  
+
 <hr>
-  
-  
+
+
 
 ### v1.7.0 --2017-11-24
 
@@ -294,9 +294,9 @@ electron-updater: v2.21.8
 
 * Minor improvements
 
-  
+
 <hr>
-  
+
 
 ### 1.6.0-beta --2017-11-16
 
@@ -314,7 +314,7 @@ electron-updater: v2.21.8
 
 * Show detailed error message on invalid Zulip server
 
-  
+
 
 **Fixes**:
 
@@ -327,8 +327,8 @@ electron-updater: v2.21.8
 * Other minor fixes
 
 <hr>
-  
-  
+
+
 ### v1.5.0 --2017-10-11
 
 **Enhancements**:
@@ -343,8 +343,8 @@ electron-updater: v2.21.8
 
 * Show server-info on hovering the server-s
 
-  
-  
+
+
 
 **Fixes**:
 
@@ -352,7 +352,7 @@ electron-updater: v2.21.8
 
 * Minor improvements
 
-  
+
 <hr>
 
 ### v1.4.0 --2017-09-04
@@ -371,7 +371,7 @@ electron-updater: v2.21.8
 
 * apt-repo on bintray for linux - [here](https://bintray.com/zulip/debian/zulip-elec)
 
-  
+
 
 **Fixes**
 
@@ -382,7 +382,7 @@ electron-updater: v2.21.8
 * Don't allow duplicate servers
 
 <hr>
-  
+
 
 ### 1.3.0-beta -- 2017-08-09
 
@@ -402,8 +402,8 @@ electron-updater: v2.21.8
 
 * Minor style improvements
 
-  
-  
+
+
 
 **Fixes**
 
@@ -423,9 +423,9 @@ electron-updater: v2.21.8
 
 * Added publisher name in windows installer
 
-  
 
-** API Changes**:
+
+**Updated dependencies**:
 
 * electron - v1.6.11
 
@@ -433,14 +433,14 @@ electron-updater: v2.21.8
 
 * electron-builder - v19.9.1
 
-  
+
 <hr>
 
 ### v1.2.0-beta -- 2017-07-12
 
 **Enhancements**:
 
-  
+
 
 * Added new setting page.
 
@@ -450,7 +450,7 @@ electron-updater: v2.21.8
 
 * Desktop notifications support on Windows.
 
-  
+
 
 **Fixes**
 
@@ -463,17 +463,17 @@ electron-updater: v2.21.8
 * Other minor bug fixes.
 
 <hr>
-  
+
 
 ### v1.1.0-beta --2017-06-23
 
 **Enhancements**:
 
-* New network error page. App will auto-reload once the network comes back 
+* New network error page. App will auto-reload once the network comes back
 * Quit shortcut - CTRL+Q [Windows]
 * Improved preference
 
-  
+
 
 **Fixes**:
 
@@ -481,8 +481,8 @@ electron-updater: v2.21.8
 * Fixed code signing error [macOS]
 
 <hr>
-  
- 
+
+
 
 ### v1.0.0-beta --2017-06-21
 
@@ -495,13 +495,13 @@ electron-updater: v2.21.8
 
 * Windows installer is properly code signed using [DigiCert](https://www.digicert.com/) certificate. You may get a warning regarding the certificate, please make it false positive.
 
- 
+
 **Fixes**:
 
 * Close/hide app properly
-* Keep app running in background on clicking X 
+* Keep app running in background on clicking X
 
-  
+
 <hr>
 
 ### v0.5.10 --2017-05-12
@@ -511,8 +511,8 @@ electron-updater: v2.21.8
 * Added self-signed server support
 * Unread message counts in tray icon
 
-  
-  
+
+
 <hr>
 
 ### v0.5.9 --2017-04-12
@@ -523,14 +523,14 @@ electron-updater: v2.21.8
 * Toggle tray icon
 * Better error handling when no internet connenction
 
-  
+
 
 **Fixes**:
 
 * Fixed permission issue on windows
 * Fixed wrong keyboard shortcuts
 
-  
+
 <hr>
 
 ### v0.5.8 --2017-02-13
@@ -543,7 +543,7 @@ Smaller Windows installer size.
 Minor improvements.
 
 
-  
+
 <hr>
 
 ### v0.5.6 --2017-02-07
@@ -554,7 +554,7 @@ Minor improvements.
 - Compile and build error in native node modules + spellchecker [Windows]
 - Missing icon on installing [Windows]
 
-  
+
 
 **Enhacements**:
 
@@ -563,7 +563,7 @@ Minor improvements.
 - Autoupdates: now using [electron-updater](https://www.npmjs.com/package/electron-updater). Removed nuts dependency.
 
 <hr>
-  
+
 
 ### v0.5.4 --2017-01-09
 
@@ -578,7 +578,7 @@ Minor improvements.
 - Added icon for AppImage
 
 <hr>
-  
+
 
 ### v0.5.3 --2016-12-24
 **Enhancements**:
@@ -594,7 +594,7 @@ Minor improvements.
 
 - Minor UI Changes
 
-  
+
 <hr>
 
 ### v0.5.2 --2016-12-13
@@ -608,13 +608,13 @@ Minor improvements.
 **Fixes**:
 - Blurry Unity icon fixed
 
-  
+
 
 **Enhancements**:
 
 * Added windows installer for 32 bit machine
 
-  
+
 <hr>
 
 ### v0.5.1 --2016-11-23
@@ -643,7 +643,7 @@ Minor improvements.
 
 - Removed electron-context-menu and simple-spellchecker dependency
 
-  
+
 
 ** Fixes**:
 
@@ -655,7 +655,7 @@ Minor improvements.
 
 - Fixed native notifications issue on linux
 
-  
+
 <hr>
 
 ### v0.0.1-alpha -- 2016-08-31
