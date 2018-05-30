@@ -17,7 +17,7 @@ This is a quick release since we recently updated the certificate for code signi
 
 **Enhancements**:
 
-* Add a new setting option to disable the auto-updates
+* Add a new setting to disable auto-updates
 
 * Add a menu item to check for updates manually
 
@@ -39,9 +39,9 @@ This is a quick release since we recently updated the certificate for code signi
 
 electron - v2.0.1
 
-electron-builder: v20.13.4
+electron-builder - v20.13.4
 
-electron-updater: v2.21.10
+electron-updater - v2.21.10
 
 <hr>
 
@@ -73,9 +73,9 @@ electron-updater: v2.21.10
 
 electron - v2.0.0
 
-electron-builder: v2.21.10
+electron-builder - v2.21.10
 
-electron-updater: v2.21.8
+electron-updater - v2.21.8
 
 
 <hr>
@@ -167,9 +167,9 @@ electron-updater: v2.21.8
 
 **Updated dependencies**:
 
-* Upgrade electron to v1.8.4.
+* electron - v1.8.4
 
-* Upgrade spectron to v3.8.0.
+* Spectron - v3.8.0
 
 
 
