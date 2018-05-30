@@ -86,7 +86,7 @@ electron-updater - v2.21.8
 
 *  [Snap](https://snapcraft.io/zulip) support for Linux
 
-* Add an option to download the file attachments instead of opening it in the browser (f70432f, 0d8dd1c)
+* Add an option to download the file attachments instead of opening it in the browser
 
 * Open image link in webapp lightbox
 
