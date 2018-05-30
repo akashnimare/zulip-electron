@@ -179,30 +179,30 @@ electron-updater - v2.21.8
 
 **Enhancements**:
 
-* Add bots mention support to reply option.
+* Add bots mention support to reply option
 
-* Show a notification when a new update available [Linux].
+* Show a notification when a new update available [Linux]
 
-* Add back button in left-sidebar.
+* Add back button in left-sidebar
 
-* Add a Loading indication for new server button.
+* Add a Loading indication for new server button
 
-* Improve help menu.
+* Improve help menu
 
-* Add menu-item to reveal app logs in file manager.
+* Add menu-item to reveal app logs in file manager
 
-* Setting page and left-sidebar UI improvements.
+* Setting page and left-sidebar UI improvements
 
-* Other minor improvments.
+* Other minor improvments
 
 
 
 
 **Fixes**:
 
-* Fix broken last active tab.
+* Fix broken last active tab
 
-* Fix Zoom In shortcut.
+* Fix Zoom In shortcut
 
 * Check whether the internet is working before reloading
 
