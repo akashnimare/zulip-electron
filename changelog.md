@@ -567,7 +567,7 @@ Minor improvements
 
 ### v0.5.4 --2017-01-09
 
-** Fixes**:
+**Fixes**:
 - Fixed :
 	 - Auto-updates
 	- Spellchecker
