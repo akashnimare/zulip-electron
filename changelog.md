@@ -134,33 +134,33 @@ electron-updater - v2.21.8
 
 * Some users wanted to change the look of the Zulip. Now you have the power. Feel free to add your own CSS using the all-new setting option **Add Custom CSS**
 
-* Added i18n locale helper script. Internalization is coming in the next release.
+* Added i18n locale helper script. Internalization is coming in the next release
 
-* Added **What's new** in `help` submenu so that you can see all the latest changes in the app.
+* Added **What's new** in `help` submenu so that you can see all the latest changes in the app
 
-* Other small improvements.
+* Other small improvements
 
 
 
 **Fixes**:
 
-* Add Zulip binary link to the bin. It was a regression we missed somehow. You can now start the app using `zulip` from a terminal [Linux].
+* Add Zulip binary link to the bin. It was a regression we missed somehow. You can now start the app using `zulip` from a terminal [Linux]
 
-* Fix app settings overriding issue. This bug was unnoticed from v1.4.0. The bug was overriding the app settings which was pretty bad. Don't worry this works as expected now.
+* Fix app settings overriding issue. This bug was unnoticed from v1.4.0. The bug was overriding the app settings which was pretty bad. Don't worry this works as expected now
 
 
 
-* Prevent drag and drop events to avoid few security risks.
+* Prevent drag and drop events to avoid few security risks
 
-* Do not allow running insecure contents in the app.
+* Do not allow running insecure contents in the app
 
-* The ugly white flickering in the webview is now fixed.
+* The ugly white flickering in the webview is now fixed
 
-* Fix position of left-sidebar on toggle.
+* Fix position of left-sidebar on toggle
 
-* Fix actions tooltip not visible on hover.
+* Fix actions tooltip not visible on hover
 
-* Other small fixes.
+* Other small fixes
 
 
 
@@ -204,17 +204,17 @@ electron-updater - v2.21.8
 
 * Fix Zoom In shortcut.
 
-* Check whether the internet is working before reloading.
+* Check whether the internet is working before reloading
 
-* New organization link overlapping existing servers.
+* New organization link overlapping existing servers
 
-* Disable electron-connect when it's run from npm start.
+* Disable electron-connect when it's run from npm start
 
-* Do not auto-reload app when the system comes back from sleep.
+* Do not auto-reload app when the system comes back from sleep
 
-* Only toggle the setting state if the element is present.
+* Only toggle the setting state if the element is present
 
-* Other minor fixes.
+* Other minor fixes
 
 
 
@@ -442,25 +442,25 @@ electron-updater - v2.21.8
 
 
 
-* Added new setting page.
+* Added new setting page
 
-* Setting for beta-updates. You can opt in for beta updates via selecting it from setting page.
+* Setting for beta-updates. You can opt in for beta updates via selecting it from setting page
 
-* Added Keyboard shortcuts to switch between multiple servers.
+* Added Keyboard shortcuts to switch between multiple servers
 
-* Desktop notifications support on Windows.
+* Desktop notifications support on Windows
 
 
 
 **Fixes**
 
-* Unregister keyboard shortcuts on windows close.
+* Unregister keyboard shortcuts on windows close
 
-* Show warning dialog while deleting server.
+* Show warning dialog while deleting server
 
-* Allow server which is signed by root cert.
+* Allow server which is signed by root cert
 
-* Other minor bug fixes.
+* Other minor bug fixes
 
 <hr>
 
@@ -471,7 +471,7 @@ electron-updater - v2.21.8
 
 * New network error page. App will auto-reload once the network comes back
 * Quit shortcut - CTRL+Q [Windows]
-* Improved preference
+* Improved preferences
 
 
 
@@ -493,7 +493,7 @@ electron-updater - v2.21.8
 * Show badge count for each Zulip server
 * Toggle window on clicking tray icon [Windows]
 
-* Windows installer is properly code signed using [DigiCert](https://www.digicert.com/) certificate. You may get a warning regarding the certificate, please make it false positive.
+* Windows installer is properly code signed using [DigiCert](https://www.digicert.com/) certificate. You may get a warning regarding the certificate, please make it false positive
 
 
 **Fixes**:
@@ -536,11 +536,11 @@ electron-updater - v2.21.8
 ### v0.5.8 --2017-02-13
 
 **Enhacements**:
-Smaller Windows installer size.
+Smaller Windows installer size
 
 ### v0.5.7 --2017-02-08
 
-Minor improvements.
+Minor improvements
 
 
 
@@ -558,9 +558,9 @@ Minor improvements.
 
 **Enhacements**:
 
-- Using NSIS instead of [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows) on windows.
+- Using NSIS instead of [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows) on windows
 
-- Autoupdates: now using [electron-updater](https://www.npmjs.com/package/electron-updater). Removed nuts dependency.
+- Autoupdates: now using [electron-updater](https://www.npmjs.com/package/electron-updater). Removed nuts dependency
 
 <hr>
 
