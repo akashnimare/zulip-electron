@@ -13,7 +13,7 @@ This is a quick release since we recently updated the certificate for code signi
 
   <hr>
 
-### v2.3.1 --2018-05-07
+### v2.3.1 --2018-05-23
 
 **Enhancements**:
 
