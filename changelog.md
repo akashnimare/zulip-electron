@@ -146,7 +146,7 @@ electron-updater - `v2.21.8`
 
 * Add Zulip binary link to the bin. It was a regression we missed somehow. You can now start the app using `zulip` from a terminal [Linux]
 
-* Fix app settings overriding issue. This bug was unnoticed from v1.4.0. The bug was overriding the app settings which was pretty bad. Don't worry this works as expected now
+* Fix app settings overriding issue. This bug was unnoticed from `v1.4.0`. The bug was overriding the app settings which was pretty bad. Don't worry this works as expected now
 
 
 
@@ -286,7 +286,7 @@ electron-updater - `v2.21.8`
 
 **Enhancements**:
 
-* Updated to Electron v1.6.15, electron-builder v19.46.4
+* Updated to Electron `v1.6.15`, electron-builder `v19.46.4`
 
 * Improved setting page for new users
 
@@ -320,7 +320,7 @@ electron-updater - `v2.21.8`
 
 * Fixed a bug which was caused by app's shortcuts. From now on our shortcuts won't hijack other apps shortcuts
 
-* Removed [electron-localshortcut](https://github.com/parro-it/electron-localshortcut) completely. Now we only depends on menu accelerators for keyboard shortcuts.
+* Removed [electron-localshortcut](https://github.com/parro-it/electron-localshortcut) completely. Now we only depends on menu accelerators for keyboard shortcuts
 
 * Handle certificate issue properly
 
@@ -341,7 +341,7 @@ electron-updater - `v2.21.8`
 
 * Red dot over dock icon for PM [macOS]
 
-* Show server-info on hovering the server-s
+* Show server-info on hovering the server icon
 
 
 
@@ -553,7 +553,7 @@ Minor improvements
 
 **Enhacements**:
 
-- Using NSIS instead of [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows) on windows
+- Using NSIS instead of [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows) on Windows
 
 - Autoupdates: now using [electron-updater](https://www.npmjs.com/package/electron-updater)
 
