@@ -550,13 +550,6 @@ Minor improvements
 
 ### v0.5.6 --2017-02-07
 
-**Fixes**:
-
-- Windows installer error
-- Compile and build error in native node modules + spellchecker [Windows]
-- Missing icon on installing [Windows]
-
-
 
 **Enhacements**:
 
@@ -565,6 +558,13 @@ Minor improvements
 - Autoupdates: now using [electron-updater](https://www.npmjs.com/package/electron-updater)
 
 - Removed nuts dependency
+
+
+**Fixes**:
+
+- Windows installer error
+- Compile and build error in native node modules + spellchecker [Windows]
+- Missing icon on installing [Windows]
 
 <hr>
 
@@ -606,17 +606,13 @@ Minor improvements
 **Enhancements**:
 
 - ⚡️ Added automatic app updates for macOS
+- Added windows installer for 32 bit machine
 
 - Better tray icons
 
 **Fixes**:
 - Blurry Unity icon fixed
 
-
-
-**Enhancements**:
-
-* Added windows installer for 32 bit machine
 
 
 <hr>
