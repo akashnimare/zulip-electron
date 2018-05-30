@@ -269,13 +269,13 @@ electron-updater - v2.21.8
 
 
 
-#**Updated dependencies**:
+**Updated dependencies**:
 
 * electron - v1.7.10
 
-* electron-builder - 19.53.6
+* electron-builder - v19.53.6
 
-* electron-updater - 2.18.2
+* electron-updater - v2.18.2
 
 
 <hr>
