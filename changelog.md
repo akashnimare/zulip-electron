@@ -52,7 +52,7 @@ electron-updater: v2.21.10
 
 **Enhancements**:
 
-* Added DND feature
+* Added do not disturb feature 
 
 * New DMG installer image
 
