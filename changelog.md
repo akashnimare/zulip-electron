@@ -37,11 +37,11 @@ This is a quick release since we recently updated the certificate for code signi
 
 **Updated dependencies**:
 
-electron - v2.0.1
+electron - `v2.0.1`
 
-electron-builder - v20.13.4
+electron-builder - `v20.13.4`
 
-electron-updater - v2.21.10
+electron-updater - `v2.21.10`
 
 <hr>
 
@@ -71,11 +71,11 @@ electron-updater - v2.21.10
 
 **Updated dependencies**:
 
-electron - v2.0.0
+electron - `v2.0.0`
 
-electron-builder - v2.21.10
+electron-builder - `v2.21.10`
 
-electron-updater - v2.21.8
+electron-updater - `v2.21.8`
 
 
 <hr>
@@ -167,9 +167,9 @@ electron-updater - v2.21.8
 
 **Updated dependencies**:
 
-* electron - v1.8.4
+* electron - `v1.8.4`
 
-* Spectron - v3.8.0
+* Spectron - `v3.8.0`
 
 
 
@@ -220,7 +220,7 @@ electron-updater - v2.21.8
 
 **Updated dependencies**:
 
-* electron - v1.8.2
+* electron - `v1.8.2`
 
 
 
@@ -271,11 +271,11 @@ electron-updater - v2.21.8
 
 **Updated dependencies**:
 
-* electron - v1.7.10
+* electron - `v1.7.10`
 
-* electron-builder - v19.53.6
+* electron-builder - `v19.53.6`
 
-* electron-updater - v2.18.2
+* electron-updater - `v2.18.2`
 
 
 <hr>
@@ -427,11 +427,11 @@ electron-updater - v2.21.8
 
 **Updated dependencies**:
 
-* electron - v1.6.11
+* electron - `v1.6.11`
 
-* spellchecker - v1.2.0
+* spellchecker - `v1.2.0`
 
-* electron-builder - v19.9.1
+* electron-builder - `v19.9.1`
 
 
 <hr>
@@ -573,7 +573,7 @@ Minor improvements
 
 **Fixes**:
 - Fixed :
-	 - Auto-updates
+	- Auto-updates
 	- Spellchecker
 	- Zooming functionality
 
@@ -633,7 +633,7 @@ Minor improvements
 
 - Better icons
 
-- Electron version updated to v1.4.7
+- Electron version updated to `v1.4.7`
 
 - Using two package.json structure
 
