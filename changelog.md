@@ -538,6 +538,8 @@ electron-updater - v2.21.8
 **Enhacements**:
 Smaller Windows installer size
 
+<hr>
+
 ### v0.5.7 --2017-02-08
 
 Minor improvements
@@ -560,7 +562,9 @@ Minor improvements
 
 - Using NSIS instead of [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows) on windows
 
-- Autoupdates: now using [electron-updater](https://www.npmjs.com/package/electron-updater). Removed nuts dependency
+- Autoupdates: now using [electron-updater](https://www.npmjs.com/package/electron-updater)
+
+- Removed nuts dependency
 
 <hr>
 
