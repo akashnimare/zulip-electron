@@ -5,7 +5,6 @@ const windowStateKeeper = require('electron-window-state');
 const isDev = require('electron-is-dev');
 const appMenu = require('./menu');
 const { appUpdater } = require('./autoupdater');
-const { crashHandler } = require('./crash-reporter');
 
 const { setAutoLaunch } = require('./startup');
 
@@ -13,6 +12,8 @@ const { app, ipcMain } = electron;
 
 const BadgeSettings = require('./../renderer/js/pages/preference/badge-settings.js');
 const ConfigUtil = require('./../renderer/js/utils/config-util.js');
+const ProxyUtil = require('./../renderer/js/utils/proxy-util.js');
+const { sentryInit } = require('./../renderer/js/utils/sentry-util.js');
 
 // Adds debug features like hotkeys for triggering dev tools and reload
 // in development mode
@@ -53,7 +54,8 @@ function createMainWindow() {
 	// Load the previous state with fallback to defaults
 	const mainWindowState = windowStateKeeper({
 		defaultWidth: 1100,
-		defaultHeight: 720
+		defaultHeight: 720,
+		path: `${app.getPath('userData')}/config`
 	});
 
 	// Let's keep the window position global so that we can access it in other process
@@ -153,6 +155,15 @@ app.on('ready', () => {
 	});
 	mainWindow = createMainWindow();
 
+	// Initialize sentry for main process
+	sentryInit();
+
+	const isSystemProxy = ConfigUtil.getConfigItem('useSystemProxy');
+
+	if (isSystemProxy) {
+		ProxyUtil.resolveSystemProxy(mainWindow);
+	}
+
 	const page = mainWindow.webContents;
 
 	page.on('dom-ready', () => {
@@ -168,7 +179,6 @@ app.on('ready', () => {
 		if (ConfigUtil.getConfigItem('autoUpdate')) {
 			appUpdater();
 		}
-		crashHandler();
 	});
 
 	// Temporarily remove this event
@@ -229,6 +239,17 @@ app.on('ready', () => {
 
 	ipcMain.on('toggleAutoLauncher', (event, AutoLaunchValue) => {
 		setAutoLaunch(AutoLaunchValue);
+	});
+
+	ipcMain.on('downloadFile', (event, url, downloadPath) => {
+		page.downloadURL(url);
+		page.session.once('will-download', (event, item) => {
+			const filePath = path.join(downloadPath, item.getFilename());
+			item.setSavePath(filePath);
+			item.once('done', () => {
+				page.send('downloadFileCompleted', filePath, item.getFilename());
+			});
+		});
 	});
 });
 

@@ -258,8 +258,8 @@ img.server-info-icon {
     border: #4EBFAC 2px solid;
 }
 
-.setting-block {
-    width: 100%;
+.manual-proxy-block {
+    width: 96%;
 }
 
 .actions-container {
@@ -364,7 +364,8 @@ i.open-tab-button {
 }
 
 .reset-data-button,
-.custom-css-button {
+.custom-css-button,
+.download-folder-button {
     display: inline-block;
     border: none;
     padding: 10px;
@@ -384,7 +385,8 @@ i.open-tab-button {
     color: #fff;
 }
 
-.selected-css-path {
+.selected-css-path,
+.download-folder-path {
     background: #eeeeee;
     padding: 10px;
     margin-top: 10px;
@@ -557,6 +559,31 @@ input.toggle-round:checked+label:after {
     background: #329588;
 }
 
+.certificates-card {
+     width:70%
+}
+
+.certificate-input {
+     width:100%;
+     margin-top: 10px; 
+     display:inline-flex;
+}
+
+.certificate-input div {
+    align-self:center;
+}
+
+.certificate-input .setting-input-value {
+    margin-left:10px;
+    max-width: 100%;
+}
+
+#add-certificate-button {
+    width:20%;
+    margin-right:0px;
+    height: 35px;
+}
+
 .tip {
     background-color: hsl(46,63%,95%);
     border: 1px solid hsl(46,63%,84%);
@@ -577,7 +604,8 @@ input.toggle-round:checked+label:after {
 /* responsive grid */
 
 @media (max-width: 650px) {
-    .selected-css-path {
+    .selected-css-path,
+    .download-folder-path  {
         margin-right: 15px;
     }
     #css-delete-action {

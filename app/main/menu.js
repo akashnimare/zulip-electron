@@ -4,12 +4,19 @@ const path = require('path');
 const { app, shell, BrowserWindow, Menu, dialog } = require('electron');
 
 const fs = require('fs-extra');
+const AdmZip = require('adm-zip');
 const { appUpdater } = require('./autoupdater');
 
 const ConfigUtil = require(__dirname + '/../renderer/js/utils/config-util.js');
 const DNDUtil = require(__dirname + '/../renderer/js/utils/dnd-util.js');
+const Logger = require(__dirname + '/../renderer/js/utils/logger-util.js');
 
 const appName = app.getName();
+
+const logger = new Logger({
+	file: 'errors.log',
+	timestamp: true
+});
 
 class AppMenu {
 	getHistorySubmenu() {
@@ -135,13 +142,26 @@ class AppMenu {
 			}, {
 				label: 'Show App Logs',
 				click() {
-					shell.openItem(app.getPath('userData'));
+					const zip = new AdmZip();
+					let date = new Date();
+					date = date.toLocaleDateString().replace(/\//g, '-');
+
+					// Create a zip file of all the logs and config data
+					zip.addLocalFolder(`${app.getPath('appData')}/${appName}/Logs`);
+					zip.addLocalFolder(`${app.getPath('appData')}/${appName}/config`);
+
+					// Put the log file in downloads folder
+					const logFilePath = `${app.getPath('downloads')}/Zulip-logs-${date}.zip`;
+					zip.writeZip(logFilePath);
+
+					// Open and select the log file
+					shell.showItemInFolder(logFilePath);
 				}
 			}, {
 				label: 'Report an Issue...',
 				click() {
-          // the goal is to notify the main.html BrowserWindow
-          // which may not be the focused window.
+					// the goal is to notify the main.html BrowserWindow
+					// which may not be the focused window.
 					BrowserWindow.getAllWindows().forEach(window => {
 						window.webContents.send('open-feedback-modal');
 					});
@@ -196,12 +216,12 @@ class AppMenu {
 						AppMenu.sendAction('open-about');
 					}
 				}
-			},	{
+			}, {
 				label: `Check for Update`,
 				click() {
 					AppMenu.checkForUpdate();
 				}
-			},	{
+			}, {
 				type: 'separator'
 			}, {
 				label: 'Desktop App Settings',
@@ -308,12 +328,12 @@ class AppMenu {
 						AppMenu.sendAction('open-about');
 					}
 				}
-			}, 	{
+			}, {
 				label: `Check for Update`,
 				click() {
 					AppMenu.checkForUpdate();
 				}
-			},	{
+			}, {
 				type: 'separator'
 			}, {
 				label: 'Desktop App Settings',
@@ -417,7 +437,7 @@ class AppMenu {
 		const resetAppSettingsMessage = 'By proceeding you will be removing all connected organizations and preferences from Zulip.';
 
 		// We save App's settings/configurations in following files
-		const settingFiles = ['window-state.json', 'domain.json', 'settings.json'];
+		const settingFiles = ['config/window-state.json', 'config/domain.json', 'config/settings.json', 'config/certificates.json'];
 
 		dialog.showMessageBox({
 			type: 'warning',
@@ -431,7 +451,8 @@ class AppMenu {
 					const getSettingFilesPath = path.join(app.getPath('appData'), appName, settingFileName);
 					fs.access(getSettingFilesPath, error => {
 						if (error) {
-							console.log(error);
+							logger.error('Error while resetting app settings.');
+							logger.error(error);
 						} else {
 							fs.unlink(getSettingFilesPath, () => {
 								AppMenu.sendAction('clear-app-data');

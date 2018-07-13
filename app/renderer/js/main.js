@@ -3,7 +3,7 @@
 const { ipcRenderer, remote } = require('electron');
 const isDev = require('electron-is-dev');
 
-const { session } = remote;
+const { session, app } = remote;
 
 require(__dirname + '/js/tray.js');
 const DomainUtil = require(__dirname + '/js/utils/domain-util.js');
@@ -13,7 +13,15 @@ const FunctionalTab = require(__dirname + '/js/components/functional-tab.js');
 const ConfigUtil = require(__dirname + '/js/utils/config-util.js');
 const DNDUtil = require(__dirname + '/js/utils/dnd-util.js');
 const ReconnectUtil = require(__dirname + '/js/utils/reconnect-util.js');
+const Logger = require(__dirname + '/js/utils/logger-util.js');
 const { feedbackHolder } = require(__dirname + '/js/feedback.js');
+
+const escape = require('escape-html');
+
+const logger = new Logger({
+	file: 'errors.log',
+	timestamp: true
+});
 
 class ServerManagerView {
 	constructor() {
@@ -58,7 +66,17 @@ class ServerManagerView {
 
 	loadProxy() {
 		return new Promise(resolve => {
-			const proxyEnabled = ConfigUtil.getConfigItem('useProxy', false);
+			// To change proxyEnable to useManualProxy in older versions
+			const proxyEnabledOld = ConfigUtil.isConfigItemExists('useProxy');
+			if (proxyEnabledOld) {
+				const proxyEnableOldState = ConfigUtil.getConfigItem('useProxy');
+				if (proxyEnableOldState) {
+					ConfigUtil.setConfigItem('useManualProxy', true);
+				}
+				ConfigUtil.removeConfigItem('useProxy');
+			}
+
+			const proxyEnabled = ConfigUtil.getConfigItem('useManualProxy') || ConfigUtil.getConfigItem('useSystemProxy');
 			if (proxyEnabled) {
 				session.fromPartition('persist:webviewsession').setProxy({
 					pacScript: ConfigUtil.getConfigItem('proxyPAC', ''),
@@ -82,7 +100,8 @@ class ServerManagerView {
 		// Default settings which should be respected
 		const settingOptions = {
 			trayIcon: true,
-			useProxy: false,
+			useManualProxy: false,
+			useSystemProxy: false,
 			showSidebar: true,
 			badgeOption: true,
 			startAtLogin: false,
@@ -97,7 +116,8 @@ class ServerManagerView {
 			dndPreviousSettings: {
 				showNotification: true,
 				silent: false
-			}
+			},
+			downloadsPath: `${app.getPath('downloads')}`
 		};
 
 		// Platform specific settings
@@ -106,6 +126,11 @@ class ServerManagerView {
 			// Only available on Windows
 			settingOptions.flashTaskbarOnMessage = true;
 			settingOptions.dndPreviousSettings.flashTaskbarOnMessage = true;
+		}
+
+		if (process.platform === 'darwin') {
+			// Only available on macOS
+			settingOptions.dockBouncing = true;
 		}
 
 		for (const i in settingOptions) {
@@ -227,7 +252,7 @@ class ServerManagerView {
 	}
 
 	onHover(index, serverName) {
-		this.$serverIconTooltip[index].innerText = serverName;
+		this.$serverIconTooltip[index].innerHTML = escape(serverName);
 		this.$serverIconTooltip[index].removeAttribute('style');
 		// To handle position of servers' tooltip due to scrolling of list of organizations
 		// This could not be handled using CSS, hence the top of the tooltip is made same
@@ -495,6 +520,7 @@ class ServerManagerView {
 			this.loadProxy().then(() => {
 				if (showAlert) {
 					alert('Proxy settings saved!');
+					ipcRenderer.send('reload-full-app');
 				}
 			});
 		});
@@ -569,7 +595,7 @@ window.onload = () => {
 
 	window.addEventListener('offline', () => {
 		reconnectUtil.clearState();
-		console.log('No internet connection, you are offline.');
+		logger.log('No internet connection, you are offline.');
 	});
 
 	// only start electron-connect (auto reload on change) when its ran

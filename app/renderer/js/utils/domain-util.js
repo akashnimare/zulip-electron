@@ -9,6 +9,8 @@ const escape = require('escape-html');
 
 const Logger = require('./logger-util');
 
+const CertificateUtil = require(__dirname + '/certificate-util.js');
+
 const logger = new Logger({
 	file: `domain-util.log`,
 	timestamp: true
@@ -106,7 +108,19 @@ class DomainUtil {
 
 		domain = this.formatUrl(domain);
 
-		const checkDomain = domain + '/static/audio/zulip.ogg';
+		const certificate = CertificateUtil.getCertificate(encodeURIComponent(domain));
+		let certificateLocation = '';
+
+		if (certificate) {
+			// To handle case where certificate has been moved from the location in certificates.json
+			try {
+				certificateLocation = fs.readFileSync(certificate);
+			} catch (err) {
+				logger.warn('Error while trying to get certificate: ' + err);
+			}
+		}
+		// If certificate for the domain exists add it as a ca key in the request's parameter else consider only domain as the parameter for request
+		const checkDomain = (certificateLocation) ? ({url: domain + '/static/audio/zulip.ogg', ca: certificateLocation}) : domain + '/static/audio/zulip.ogg';
 
 		const serverConf = {
 			icon: defaultIconUrl,
@@ -116,21 +130,16 @@ class DomainUtil {
 
 		return new Promise((resolve, reject) => {
 			request(checkDomain, (error, response) => {
-				const certsError =
-					[
-						'Error: self signed certificate',
-						'Error: unable to verify the first certificate',
-						'Error: unable to get local issuer certificate'
-					];
-
 				// If the domain contains following strings we just bypass the server
 				const whitelistDomains = [
 					'zulipdev.org'
 				];
 
-				// make sure that error is a error or string not undefined
+				// make sure that error is an error or string not undefined
 				// so validation does not throw error.
 				error = error || '';
+
+				const certsError = error.toString().includes('certificate');
 				if (!error && response.statusCode < 400) {
 					// Correct
 					this.getServerSettings(domain).then(serverSettings => {
@@ -138,7 +147,7 @@ class DomainUtil {
 					}, () => {
 						resolve(serverConf);
 					});
-				} else if (domain.indexOf(whitelistDomains) >= 0 || certsError.indexOf(error.toString()) >= 0) {
+				} else if (domain.indexOf(whitelistDomains) >= 0 || certsError) {
 					if (silent) {
 						this.getServerSettings(domain).then(serverSettings => {
 							resolve(serverSettings);
@@ -146,15 +155,19 @@ class DomainUtil {
 							resolve(serverConf);
 						});
 					} else {
+						// Report error to sentry to get idea of possible certificate errors
+						// users get when adding the servers
+						logger.reportSentry(new Error(error));
 						const certErrorMessage = `Do you trust certificate from ${domain}? \n ${error}`;
-						const certErrorDetail = `The server you're connecting to is either someone impersonating the Zulip server you entered, or the server you're trying to connect to is configured in an insecure way.
-						\n Unless you have a good reason to believe otherwise, you should not proceed.
-						\n You can click here if you'd like to proceed with the connection.`;
+						const certErrorDetail = `The organization you're connecting to is either someone impersonating the Zulip server you entered, or the server you're trying to connect to is configured in an insecure way.
+						\nIf you have a valid certificate please add it from Settings>Organizations and try to add the organization again.
+						\nUnless you have a good reason to believe otherwise, you should not proceed.
+						\nYou can click here if you'd like to proceed with the connection.`;
 
 						dialog.showMessageBox({
 							type: 'warning',
 							buttons: ['Yes', 'No'],
-							defaultId: 0,
+							defaultId: 1,
 							message: certErrorMessage,
 							detail: certErrorDetail
 						}, response => {
@@ -171,7 +184,8 @@ class DomainUtil {
 					}
 				} else {
 					const invalidZulipServerError = `${domain} does not appear to be a valid Zulip server. Make sure that \
-					\n(1) you can connect to that URL in a web browser and \n (2) if you need a proxy to connect to the Internet, that you've configured your proxy in the Network settings \n (3) its a zulip server`;
+					\n (1) you can connect to that URL in a web browser and \n (2) if you need a proxy to connect to the Internet, that you've configured your proxy in the Network settings \n (3) its a zulip server \
+					\n (4) the server has a valid certificate, you can add custom certificates in Settings>Organizations`;
 					reject(invalidZulipServerError);
 				}
 			});
@@ -208,18 +222,24 @@ class DomainUtil {
 			try {
 				request(url).on('response', response => {
 					response.on('error', err => {
-						console.log(err);
+						logger.log('Could not get server icon.');
+						logger.log(err);
+						logger.reportSentry(err);
 						resolve(defaultIconUrl);
 					});
 					response.pipe(file).on('finish', () => {
 						resolve(filePath);
 					});
 				}).on('error', err => {
-					console.log(err);
+					logger.log('Could not get server icon.');
+					logger.log(err);
+					logger.reportSentry(err);
 					resolve(defaultIconUrl);
 				});
 			} catch (err) {
-				console.log(err);
+				logger.log('Could not get server icon.');
+				logger.log(err);
+				logger.reportSentry(err);
 				resolve(defaultIconUrl);
 			}
 		});
@@ -237,7 +257,7 @@ class DomainUtil {
 	}
 
 	reloadDB() {
-		const domainJsonPath = path.join(app.getPath('userData'), '/domain.json');
+		const domainJsonPath = path.join(app.getPath('userData'), 'config/domain.json');
 		try {
 			const file = fs.readFileSync(domainJsonPath, 'utf8');
 			JSON.parse(file);
@@ -251,6 +271,7 @@ class DomainUtil {
 				);
 				logger.error('Error while JSON parsing domain.json: ');
 				logger.error(err);
+				logger.reportSentry(err);
 			}
 		}
 		this.db = new JsonDB(domainJsonPath, true, true);

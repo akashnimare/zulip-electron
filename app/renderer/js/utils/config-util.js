@@ -48,6 +48,12 @@ class ConfigUtil {
 			return value;
 		}
 	}
+	// This function returns whether a key exists in the configuration file (settings.json)
+	isConfigItemExists(key) {
+		this.reloadDB();
+		const value = this.db.getData('/')[key];
+		return (value !== undefined);
+	}
 
 	setConfigItem(key, value) {
 		this.db.push(`/${key}`, value, true);
@@ -60,7 +66,7 @@ class ConfigUtil {
 	}
 
 	reloadDB() {
-		const settingsJsonPath = path.join(app.getPath('userData'), '/settings.json');
+		const settingsJsonPath = path.join(app.getPath('userData'), '/config/settings.json');
 		try {
 			const file = fs.readFileSync(settingsJsonPath, 'utf8');
 			JSON.parse(file);
@@ -69,10 +75,11 @@ class ConfigUtil {
 				fs.unlinkSync(settingsJsonPath);
 				dialog.showErrorBox(
 					'Error saving settings',
-					'We encountered error while saving current settings.'
+					'We encountered an error while saving the settings.'
 				);
 				logger.error('Error while JSON parsing settings.json: ');
 				logger.error(err);
+				logger.reportSentry(err);
 			}
 		}
 		this.db = new JsonDB(settingsJsonPath, true, true);
